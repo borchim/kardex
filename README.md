@@ -116,4 +116,4 @@ After running the seeders, you can log in with the following credentials:
 
 ## License
 
-The vCardGo React is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The vCardGo React is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).# Kardex
