@@ -3,6 +3,7 @@ import { Link } from '@inertiajs/react';
 import { Menu, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { getImageDisplayUrl } from '@/utils/imageUrlHelper';
+import { LanguageSwitcher } from '@/components/language-switcher';
 
 interface CustomPage {
   id: number;
@@ -282,6 +283,7 @@ export default function Header({ settings, sectionData, customPages = [], brandC
 
           {/* Auth Buttons */}
           <div className="hidden md:flex items-center gap-4">
+            <LanguageSwitcher />
             {user ? (
               <Link
                 href={route('dashboard')}
@@ -481,7 +483,10 @@ export default function Header({ settings, sectionData, customPages = [], brandC
                   {item.name}
                 </Link>
               ))}
-              <div className="pt-4 space-y-3 border-t border-gray-200">
+              <div className="pt-4 border-t border-gray-200 pb-2">
+                <LanguageSwitcher />
+              </div>
+              <div className="space-y-3">
                 {user ? (
                   <Link
                     href={route('dashboard')}
