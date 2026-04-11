@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /Users/borchim/Downloads/codecanyon-3FohzjJo-vcard-saas-digital-business-card-builder-bio-links-builder/main-file remote -v)",
+      "Bash(find resources/js -type f \\\\\\( -name \"*.ts\" -o -name \"*.tsx\" -o -name \"*.js\" -o -name \"*.jsx\" -o -name \"*.json\" \\\\\\) -exec sed -i '' 's/vCard SaaS/Kardex/g; s/vCARD/Kardex/g' {} +)"
+    ]
+  }
+}

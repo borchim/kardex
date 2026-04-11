@@ -1,0 +1,50 @@
+<?php
+
+namespace Workdo\$STUDLY_NAME$\Database\Seeders;
+
+use App\Models\Role;
+use App\Models\Permission;
+use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Artisan;
+
+class PermissionTableSeeder extends Seeder
+{
+     public function run()
+    {
+        Model::unguard();
+        Artisan::call('cache:clear');
+        $module = '$STUDLY_NAME$';
+
+        $permissions = [
+            ['name' => 'manage-$LOWER_NAME$', 'module' => $module, 'label' => 'Manage $STUDLY_NAME$', 'description' => 'Can manage $STUDLY_NAME$'],
+            ['name' => 'create-$LOWER_NAME$', 'module' => $module, 'label' => 'Create $STUDLY_NAME$', 'description' => 'Can create $STUDLY_NAME$'],
+            ['name' => 'edit-$LOWER_NAME$', 'module' => $module, 'label' => 'Edit $STUDLY_NAME$', 'description' => 'Can edit $STUDLY_NAME$'],
+            ['name' => 'delete-$LOWER_NAME$', 'module' => $module, 'label' => 'Delete $STUDLY_NAME$', 'description' => 'Can delete $STUDLY_NAME$'],
+        ];
+
+        $roles = Role::whereIn('name', ['company', 'superadmin'])->get();
+        
+        foreach ($permissions as $value) {
+            $permission = Permission::where('name', $value['name'])->first();
+            
+            if (!$permission) {
+                $permission = Permission::create([
+                    'name' => $value['name'],
+                    'label' => $value['label'],
+                    'description' => $value['description'],
+                    'guard_name' => 'web',
+                    'module' => $value['module'],
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+            }
+            
+            foreach ($roles as $role) {
+                if (!$role->hasPermissionTo($value['name'])) {
+                    $role->givePermissionTo($permission);
+                }
+            }
+        }
+    }
+}
