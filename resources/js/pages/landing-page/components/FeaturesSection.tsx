@@ -93,10 +93,10 @@ export default function FeaturesSection({ settings, sectionData, brandColor = '#
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`text-center mb-8 sm:mb-12 lg:mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            {sectionData.title || 'Powerful Features for Modern Networking'}
+            {t(sectionData.title || 'Powerful Features for Modern Networking')}
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium">
-            {sectionData.description || 'Everything you need to create, share, and manage your digital business presence. Built for professionals who value efficiency and innovation.'}
+            {t(sectionData.description || 'Everything you need to create, share, and manage your digital business presence. Built for professionals who value efficiency and innovation.')}
           </p>
         </div>
 
@@ -124,10 +124,10 @@ export default function FeaturesSection({ settings, sectionData, brandColor = '#
                     </div>
                   )}
                   <h3 className="text-xl font-bold text-gray-900 mb-4" id={`feature-${index}-title`}>
-                    {feature.title}
+                    {t(feature.title || '')}
                   </h3>
                   <p className="text-gray-600 leading-relaxed">
-                    {feature.description}
+                    {t(feature.description || '')}
                   </p>
                 </div>
               );
@@ -148,8 +148,8 @@ export default function FeaturesSection({ settings, sectionData, brandColor = '#
                     </div>
                   )}
                   <div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-1">{feature.title}</h3>
-                    <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+                    <h3 className="text-lg font-bold text-gray-900 mb-1">{t(feature.title || '')}</h3>
+                    <p className="text-gray-600 leading-relaxed">{t(feature.description || '')}</p>
                   </div>
                 </div>
               );
@@ -171,8 +171,8 @@ export default function FeaturesSection({ settings, sectionData, brandColor = '#
                         <IconComponent className="w-7 h-7" style={{ color: brandColor }} />
                       </div>
                     )}
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">{feature.title}</h3>
-                    <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">{t(feature.title || '')}</h3>
+                    <p className="text-gray-600 text-sm leading-relaxed">{t(feature.description || '')}</p>
                   </div>
                 </div>
               );
@@ -200,8 +200,8 @@ export default function FeaturesSection({ settings, sectionData, brandColor = '#
                     </div>
                   )}
                   <div className={`flex-1 ${!isEven ? 'lg:text-right' : ''}`}>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">{feature.title}</h3>
-                    <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">{t(feature.title || '')}</h3>
+                    <p className="text-gray-600 leading-relaxed">{t(feature.description || '')}</p>
                   </div>
                 </div>
               );

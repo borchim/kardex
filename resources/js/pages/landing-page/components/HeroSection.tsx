@@ -57,7 +57,7 @@ export default function HeroSection({ settings, sectionData, brandColor = '#3b82
           className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium border"
           style={{ borderColor: brandColor, color: brandColor, backgroundColor: `${brandColor}15` }}
         >
-          {sectionData.announcement_text}
+          {t(sectionData.announcement_text)}
         </div>
       )}
       <h1
@@ -66,7 +66,7 @@ export default function HeroSection({ settings, sectionData, brandColor = '#3b82
         role="banner"
         aria-label="Main heading"
       >
-        {sectionData.title || t('Create Your Digital Business Card')}
+        {t(sectionData.title || 'Create Your Digital Business Card')}
       </h1>
       <p
         className={`text-lg md:text-xl leading-relaxed font-medium ${
@@ -74,7 +74,7 @@ export default function HeroSection({ settings, sectionData, brandColor = '#3b82
         }`}
         style={{ color: subtitleColor, opacity: 0.85 }}
       >
-        {sectionData.subtitle || t('Transform your networking with professional digital business cards.')}
+        {t(sectionData.subtitle || 'Transform your networking with professional digital business cards.')}
       </p>
       <div className={`flex flex-col sm:flex-row gap-3 sm:gap-4 ${
         layout === 'centered' || layout === 'full-width' ? 'justify-center' : 'justify-center lg:justify-start'
@@ -93,7 +93,7 @@ export default function HeroSection({ settings, sectionData, brandColor = '#3b82
           }}
           aria-label={isRegistrationEnabled ? "Start free trial - Register for Kardex" : "Login to Kardex"}
         >
-          {sectionData.primary_button_text || t('Start Free Trial')}
+          {t(sectionData.primary_button_text || 'Start Free Trial')}
           <ArrowRight size={18} />
         </Link>
         <Link
@@ -103,7 +103,7 @@ export default function HeroSection({ settings, sectionData, brandColor = '#3b82
           aria-label="Login to existing Kardex account"
         >
           <Play size={18} />
-          {sectionData.secondary_button_text || t('Login')}
+          {t(sectionData.secondary_button_text || 'Login')}
         </Link>
       </div>
       {sectionData.stats && sectionData.stats.length > 0 && (

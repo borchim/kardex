@@ -60,6 +60,8 @@ export default function LanguageManage({
     const [selectedLanguage, setSelectedLanguage] = useState(currentLanguage);
     const [translations, setTranslations] = useState<Record<string, string>>(paginatedTranslations.data || {});
     const [packageTranslations, setPackageTranslations] = useState<Record<string, Record<string, string>>>({});
+    const [landingPageTranslations, setLandingPageTranslations] = useState<Record<string, string>>({});
+    const [loadingLandingPage, setLoadingLandingPage] = useState(false);
     const [searchTerm, setSearchTerm] = useState(filters.search || '');
     const [isLoading, setIsLoading] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
@@ -77,6 +79,16 @@ export default function LanguageManage({
     const currentTranslations = useMemo(() => {
         if (activeSource === 'general') {
             return Object.entries(paginatedTranslations.data || {});
+        } else if (activeSource === 'landing-page') {
+            const all = Object.entries(landingPageTranslations);
+            const filtered = searchTerm
+                ? all.filter(([key, value]) =>
+                    key.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    value.toLowerCase().includes(searchTerm.toLowerCase())
+                )
+                : all;
+            const startIndex = (packagePage - 1) * packagePerPage;
+            return filtered.slice(startIndex, startIndex + packagePerPage);
         } else {
             const currentPackageTranslations = packageTranslations[activeSource] || {};
             const allPackageTranslations = Object.entries(currentPackageTranslations);
@@ -91,7 +103,7 @@ export default function LanguageManage({
             const startIndex = (packagePage - 1) * packagePerPage;
             return filteredTranslations.slice(startIndex, startIndex + packagePerPage);
         }
-    }, [paginatedTranslations.data, packageTranslations[activeSource], activeSource, packagePage, packagePerPage, searchTerm]);
+    }, [paginatedTranslations.data, packageTranslations[activeSource], landingPageTranslations, activeSource, packagePage, packagePerPage, searchTerm]);
 
     // Handle search with debounce
     const handleSearch = () => {
@@ -173,6 +185,24 @@ export default function LanguageManage({
         }
     };
 
+    // Load landing page translations
+    const loadLandingPageTranslations = async (forceReload = false) => {
+        if (!forceReload && Object.keys(landingPageTranslations).length > 0) return;
+        setLoadingLandingPage(true);
+        try {
+            const url = route('languages.landing-page.translations', { locale: selectedLanguage });
+            const response = await fetch(`${url}?t=${Date.now()}`);
+            if (response.ok) {
+                const data = await response.json();
+                setLandingPageTranslations(data.translations || {});
+            }
+        } catch (error) {
+            toast.error('Failed to load landing page translations');
+        } finally {
+            setLoadingLandingPage(false);
+        }
+    };
+
     // Load package translations
     const loadPackageTranslations = async (packageName: string, forceReload = false) => {
         if (!forceReload && packageTranslations[packageName] && Object.keys(packageTranslations[packageName]).length > 0) return; // Already loaded
@@ -200,7 +230,9 @@ export default function LanguageManage({
     const handleSourceChange = (value: string) => {
         setActiveSource(value);
         setPackagePage(1); // Reset to first page when switching sources
-        if (value !== 'general') {
+        if (value === 'landing-page') {
+            loadLandingPageTranslations();
+        } else if (value !== 'general') {
             loadPackageTranslations(value);
         }
     };
@@ -218,6 +250,12 @@ export default function LanguageManage({
             [key]: value
         }));
         paginatedTranslations.data[key] = value;
+        setHasChanges(true);
+    };
+
+    // Handle landing page translation change
+    const handleLandingPageTranslationChange = (key: string, value: string) => {
+        setLandingPageTranslations(prev => ({ ...prev, [key]: value }));
         setHasChanges(true);
     };
 
@@ -287,7 +325,22 @@ export default function LanguageManage({
     const handleSave = async () => {
         setIsSaving(true);
         try {
-            if (activeSource === 'general') {
+            if (activeSource === 'landing-page') {
+                const response = await fetch(route('languages.update', { locale: selectedLanguage }), {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '',
+                    },
+                    body: JSON.stringify({ translations: landingPageTranslations })
+                });
+                if (response.ok) {
+                    toast.success('Landing page translations saved successfully');
+                    setHasChanges(false);
+                } else {
+                    toast.error('Failed to save landing page translations');
+                }
+            } else if (activeSource === 'general') {
                 const response = await fetch(route('languages.update', { locale: selectedLanguage }), {
                     method: 'POST',
                     headers: {
@@ -405,6 +458,18 @@ export default function LanguageManage({
                                 <Edit3 className="h-3 w-3 ml-auto" />
                             )}
                         </Button>
+                        <Button
+                            variant={activeSource === 'landing-page' ? "default" : "ghost"}
+                            className="w-full justify-start gap-2"
+                            onClick={() => handleSourceChange('landing-page')}
+                            disabled={isLoading}
+                        >
+                            <Globe className="h-4 w-4" />
+                            <span>Landing Page</span>
+                            {activeSource === 'landing-page' && (
+                                <Edit3 className="h-3 w-3 ml-auto" />
+                            )}
+                        </Button>
                         {enabledPackages
                             .filter(pkg =>
                                 pkg.name.toLowerCase().includes(sourceSearchTerm.toLowerCase()) ||
@@ -515,7 +580,58 @@ export default function LanguageManage({
                             </div>
                         )}
 
-                        {activeSource !== 'general' && (
+                        {activeSource === 'landing-page' && (
+                            <div>
+                                {loadingLandingPage ? (
+                                    <div className="flex items-center justify-center py-8">
+                                        <RefreshCw className="h-6 w-6 animate-spin" />
+                                        <span className="ml-2">Loading landing page translations...</span>
+                                    </div>
+                                ) : Object.keys(landingPageTranslations).length === 0 ? (
+                                    <div className="text-center py-8 text-muted-foreground">
+                                        <Globe className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                                        No landing page translations found.
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <div className="border rounded-lg">
+                                            <div className="grid grid-cols-5 gap-4 p-3 bg-muted/50 border-b font-medium text-sm">
+                                                <div className="col-span-2">Translation Key</div>
+                                                <div className="col-span-3">Translation Value</div>
+                                            </div>
+                                            <div className="max-h-[80vh] overflow-auto">
+                                                {currentTranslations.map(([key, value]) => (
+                                                    <TranslationItem
+                                                        key={`landing-${key}`}
+                                                        translationKey={key}
+                                                        value={landingPageTranslations[key] !== undefined ? landingPageTranslations[key] : value}
+                                                        onChange={(k, v) => handleLandingPageTranslationChange(k, v)}
+                                                    />
+                                                ))}
+                                            </div>
+                                        </div>
+                                        {Object.keys(landingPageTranslations).length > packagePerPage && (
+                                            <div className="mt-4">
+                                                <div className="flex items-center justify-between px-2 py-4">
+                                                    <div className="text-sm text-muted-foreground">
+                                                        Showing {((packagePage - 1) * packagePerPage) + 1} to {Math.min(packagePage * packagePerPage, Object.keys(landingPageTranslations).length)} of {Object.keys(landingPageTranslations).length} results
+                                                    </div>
+                                                    <div className="flex items-center space-x-2">
+                                                        <Button variant="outline" size="sm" onClick={() => handlePackagePageChange(packagePage - 1)} disabled={packagePage === 1}>Previous</Button>
+                                                        {Array.from({ length: Math.ceil(Object.keys(landingPageTranslations).length / packagePerPage) }, (_, i) => i + 1).map(page => (
+                                                            <Button key={page} variant={page === packagePage ? "default" : "outline"} size="sm" onClick={() => handlePackagePageChange(page)}>{page}</Button>
+                                                        ))}
+                                                        <Button variant="outline" size="sm" onClick={() => handlePackagePageChange(packagePage + 1)} disabled={packagePage >= Math.ceil(Object.keys(landingPageTranslations).length / packagePerPage)}>Next</Button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+                            </div>
+                        )}
+
+                        {activeSource !== 'general' && activeSource !== 'landing-page' && (
                             <div>
                                 {loadingPackages[activeSource] ? (
                                     <div className="flex items-center justify-center py-8">

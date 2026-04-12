@@ -425,6 +425,96 @@ class LanguageController extends Controller
         }
     }
 
+    public function getLandingPageTranslations($locale)
+    {
+        $enPath = resource_path('lang/en.json');
+        $localePath = resource_path("lang/{$locale}.json");
+
+        $enTranslations = File::exists($enPath)
+            ? (json_decode(File::get($enPath), true) ?? [])
+            : [];
+
+        $localeTranslations = File::exists($localePath)
+            ? (json_decode(File::get($localePath), true) ?? [])
+            : $enTranslations;
+
+        $result = [];
+        foreach ($this->getLandingPageKeys() as $key) {
+            $result[$key] = $localeTranslations[$key] ?? $enTranslations[$key] ?? $key;
+        }
+
+        return response()->json(['translations' => $result]);
+    }
+
+    private function getLandingPageKeys(): array
+    {
+        return [
+            // Hero
+            'Create Your Digital Business Card',
+            'Create Your Digital Business Card in Minutes',
+            'Transform your networking with professional digital business cards.',
+            'Start Free Trial',
+            'Login',
+            // Features
+            'Powerful Features for Modern Networking',
+            'Everything you need to create, share, and manage your digital business presence. Built for professionals who value efficiency and innovation.',
+            'QR Code Generation',
+            'Generate unique QR codes for instant contact sharing. Perfect for business cards, flyers, and networking events.',
+            'NFC Technology',
+            'Tap-to-share functionality with NFC-enabled devices. Modern networking made simple and professional.',
+            'Easy Sharing',
+            'Share your digital card via email, SMS, social media, or direct links. Multiple sharing options available.',
+            'Analytics & Insights',
+            'Track views, clicks, and engagement metrics. Understand how your network interacts with your card.',
+            'Custom Domains',
+            'Use your own domain for a professional branded experience. Build trust with custom URLs.',
+            'Secure & Private',
+            'Enterprise-grade security with privacy controls. Your data is protected and under your control.',
+            // FAQ
+            'Frequently Asked Questions',
+            "Got questions? We've got answers. If you can't find what you're looking for, feel free to contact our support team.",
+            'Still have questions?',
+            'Contact Support',
+            'How does Kardex work?',
+            'Kardex allows you to create digital business cards that can be shared via QR codes, NFC technology, or direct links. Simply create your card, customize it with your information, and start sharing!',
+            'Is my data secure?',
+            'Yes, we use enterprise-grade security measures to protect your data. All information is encrypted and stored securely. You have full control over your privacy settings.',
+            'Can I customize my digital business card?',
+            'Absolutely! You can customize colors, fonts, layout, add your logo, social media links, and much more. Our platform offers extensive customization options.',
+            'Do I need technical skills to use Kardex?',
+            'Not at all! Kardex is designed to be user-friendly. You can create and customize your digital business card in minutes without any technical knowledge.',
+            'Can I track who views my card?',
+            'Yes, our analytics feature allows you to track views, clicks, and engagement metrics so you can understand how your network interacts with your card.',
+            // Testimonials
+            'What Our Clients Say',
+            "Don't just take our word for it. Here's what professionals around the world are saying about vCard.",
+            'Trusted by Professionals Worldwide',
+            // Why Choose Us
+            'Why Choose vCard?',
+            "We're not just another digital business card platform. We're your partner in building meaningful professional connections that drive business growth.",
+            'Trusted by Industry Leaders',
+            'Join the growing community of professionals',
+            'Ready to get started?',
+            'Join thousands of satisfied users today',
+            // About
+            'About vCard',
+            'We are passionate about transforming how professionals connect.',
+            'Innovation Driven',
+            'Building the future of networking',
+            'Empowering Professional Connections Since 2020',
+            'Founded by a team of networking enthusiasts and technology experts, Kardex was born from the frustration of outdated paper business cards and the need for a more sustainable, efficient solution. Today, we serve over 10,000 professionals across 50+ countries, helping them build stronger business relationships through innovative digital solutions.',
+            // Footer
+            'Transforming professional networking with innovative digital business cards. Connect, share, and grow your network effortlessly.',
+            'Stay Updated with Our Latest Features',
+            'Join our newsletter for product updates and networking tips',
+            // Plans
+            'Monthly',
+            'Yearly',
+            'Recommended',
+            'Features',
+        ];
+    }
+
     public function updatePackageTranslations(Request $request, $locale, $packageName)
     {
         if (!in_array($locale, self::ALLOWED_LANGUAGES)) {

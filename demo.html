@@ -461,6 +461,13 @@
       document.getElementById('copyLabel').textContent = 'Link Copied!';
       document.getElementById('copyIcon').setAttribute('data-lucide', 'check');
       lucide.createIcons();
-      setTimeout(() => {
-        document.getElementById('copyLabel').textContent = 'Copy Profile Link';
-        document.getElementById('copyIcon').set
+            setTimeout(() => {
+              document.getElementById('copyLabel').textContent = 'Copy Profile Link';
+              document.getElementById('copyIcon').setAttribute('data-lucide', 'link-2');
+              lucide.createIcons();
+            }, 2000);
+          });
+        }
+      </script>
+      </body>
+      </html>

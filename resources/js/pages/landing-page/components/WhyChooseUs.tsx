@@ -87,10 +87,10 @@ export default function WhyChooseUs({ settings, sectionData, brandColor = '#3b82
           {/* Left Content */}
           <div className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-              {sectionData.title || t('Why Choose vCard?')}
+              {t(sectionData.title || 'Why Choose vCard?')}
             </h2>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed font-medium">
-              {sectionData.subtitle || t('We\'re not just another digital business card platform. We\'re your partner in building meaningful professional connections that drive business growth.')}
+              {t(sectionData.subtitle || "We're not just another digital business card platform. We're your partner in building meaningful professional connections that drive business growth.")}
             </p>
 
             <div className="space-y-4 sm:space-y-6">
@@ -119,10 +119,10 @@ export default function WhyChooseUs({ settings, sectionData, brandColor = '#3b82
           <div className={`bg-gray-50 rounded-xl p-8 border border-gray-200 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}>
             <div className="text-center mb-8">
               <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                {sectionData.stats_title || t('Trusted by Industry Leaders')}
+                {t(sectionData.stats_title || 'Trusted by Industry Leaders')}
               </h3>
               <p className="text-gray-600">
-                {sectionData.stats_subtitle || t('Join the growing community of professionals')}
+                {t(sectionData.stats_subtitle || 'Join the growing community of professionals')}
               </p>
             </div>
 
@@ -137,8 +137,8 @@ export default function WhyChooseUs({ settings, sectionData, brandColor = '#3b82
 
             {(sectionData.cta_title || sectionData.cta_subtitle) && (
               <div className="mt-8 p-6 rounded-lg text-white text-center" style={{ backgroundColor: brandColor }}>
-                <div className="text-xl font-bold mb-2">{sectionData.cta_title || t('Ready to get started?')}</div>
-                <div className="text-gray-300">{sectionData.cta_subtitle || t('Join thousands of satisfied users today')}</div>
+                <div className="text-xl font-bold mb-2">{t(sectionData.cta_title || 'Ready to get started?')}</div>
+                <div className="text-gray-300">{t(sectionData.cta_subtitle || 'Join thousands of satisfied users today')}</div>
               </div>
             )}
           </div>

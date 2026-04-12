@@ -104,10 +104,10 @@ export default function TestimonialsSection({ testimonials, settings, sectionDat
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`text-center mb-8 sm:mb-12 lg:mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            {sectionData?.title || t('What Our Clients Say')}
+            {t(sectionData?.title || 'What Our Clients Say')}
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium">
-            {sectionData?.subtitle || t("Don't just take our word for it. Here's what professionals around the world are saying about vCard.")}
+            {t(sectionData?.subtitle || "Don't just take our word for it. Here's what professionals around the world are saying about vCard.")}
           </p>
         </div>
 
@@ -170,7 +170,7 @@ export default function TestimonialsSection({ testimonials, settings, sectionDat
           <div className="mt-8 sm:mt-12 lg:mt-16 text-center">
             <div className="bg-white rounded-xl p-8 border border-gray-200">
               <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                {sectionData?.trust_title || 'Trusted by Professionals Worldwide'}
+                {t(sectionData?.trust_title || 'Trusted by Professionals Worldwide')}
               </h3>
               <div className="flex justify-center items-center gap-8 flex-wrap">
                 {sectionData.trust_stats.map((stat, index) => (

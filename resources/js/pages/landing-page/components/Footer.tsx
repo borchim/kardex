@@ -165,7 +165,7 @@ export default function Footer({ settings, sectionData = {}, brandColor = '#3b82
                 </span>
               </Link>
               <p className="text-gray-400 mb-8 leading-relaxed">
-                {sectionData.description || t('Transforming professional networking with innovative digital business cards. Connect, share, and grow your network effortlessly.')}
+                {t(sectionData.description || 'Transforming professional networking with innovative digital business cards. Connect, share, and grow your network effortlessly.')}
               </p>
               
               {/* Contact Info */}
@@ -260,10 +260,10 @@ export default function Footer({ settings, sectionData = {}, brandColor = '#3b82
           <div className="border-t border-gray-800 py-8 sm:py-12">
             <div className="text-center max-w-2xl mx-auto">
               <h3 className="text-xl font-bold text-white mb-4">
-                {sectionData.newsletter_title || t('Stay Updated with Our Latest Features')}
+                {t(sectionData.newsletter_title || 'Stay Updated with Our Latest Features')}
               </h3>
               <p className="text-gray-400 mb-6">
-                {sectionData.newsletter_subtitle || t('Join our newsletter for product updates and networking tips')}
+                {t(sectionData.newsletter_subtitle || 'Join our newsletter for product updates and networking tips')}
               </p>
               
               {/* Only show flash message if this component was used for submission */}

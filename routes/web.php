@@ -527,6 +527,7 @@ Route::middleware(['auth', 'verified','setting'])->group(function () {
         Route::post('/languages/{locale}/update', [LanguageController::class, 'updateTranslations'])->name('languages.update');
         Route::get('/languages/{locale}/package/{packageName}', [LanguageController::class, 'getPackageTranslations'])->name('languages.package.translations');
         Route::post('/languages/{locale}/package/{packageName}/update', [LanguageController::class, 'updatePackageTranslations'])->name('languages.package.update');
+        Route::get('/languages/{locale}/landing-page', [LanguageController::class, 'getLandingPageTranslations'])->name('languages.landing-page.translations');
 
         // Landing Page content management (Super Admin only)
         Route::middleware('App\Http\Middleware\SuperAdminMiddleware')->group(function () {

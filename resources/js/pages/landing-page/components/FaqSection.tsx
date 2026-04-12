@@ -81,10 +81,10 @@ export default function FaqSection({ faqs, settings, sectionData, brandColor = '
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8 sm:mb-12 lg:mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            {sectionData?.title || 'Frequently Asked Questions'}
+            {t(sectionData?.title || 'Frequently Asked Questions')}
           </h2>
           <p className="text-lg text-gray-600 leading-relaxed font-medium">
-            {sectionData?.subtitle || 'Got questions? We\'ve got answers. If you can\'t find what you\'re looking for, feel free to contact our support team.'}
+            {t(sectionData?.subtitle || "Got questions? We've got answers. If you can't find what you're looking for, feel free to contact our support team.")}
           </p>
         </div>
 
@@ -102,7 +102,7 @@ export default function FaqSection({ faqs, settings, sectionData, brandColor = '
                 aria-describedby={`faq-question-${faq.id}`}
               >
                 <h3 className="text-lg font-semibold text-gray-900 pr-4" id={`faq-question-${faq.id}`}>
-                  {faq.question}
+                  {t(faq.question || '')}
                 </h3>
                 {openFaq === faq.id ? (
                   <ChevronUp className="w-5 h-5 text-gray-600 flex-shrink-0" aria-hidden="true" />
@@ -114,7 +114,7 @@ export default function FaqSection({ faqs, settings, sectionData, brandColor = '
               {openFaq === faq.id && (
                 <div className="px-6 pb-4 border-t border-gray-200" id={`faq-answer-${faq.id}`} role="region" aria-labelledby={`faq-question-${faq.id}`}>
                   <p className="text-gray-600 leading-relaxed pt-4">
-                    {faq.answer}
+                    {t(faq.answer || '')}
                   </p>
                 </div>
               )}
@@ -125,14 +125,14 @@ export default function FaqSection({ faqs, settings, sectionData, brandColor = '
         {(sectionData?.cta_text || sectionData?.button_text) && (
           <div className="text-center mt-8 sm:mt-12">
             <p className="text-gray-600 mb-4">
-              {sectionData?.cta_text || t('Still have questions?')}
+              {t(sectionData?.cta_text || 'Still have questions?')}
             </p>
             <a
               href="#contact"
               className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white shadow-sm hover:brightness-110 hover:!text-white transition-all duration-200"
               style={{ backgroundColor: brandColor }}
             >
-              {sectionData?.button_text || t('Contact Support')}
+              {t(sectionData?.button_text || 'Contact Support')}
             </a>
           </div>
         )}

@@ -125,10 +125,10 @@ export default function AboutUs({ settings, sectionData, brandColor = '#3b82f6' 
             <span className="text-3xl">{sectionData.image_icon || '🚀'}</span>
           </div>
           <h4 className="text-xl font-semibold text-gray-900 mb-2">
-            {sectionData.image_title || t('Innovation Driven')}
+            {t(sectionData.image_title || 'Innovation Driven')}
           </h4>
           <p className="text-gray-600">
-            {sectionData.image_subtitle || t('Building the future of networking')}
+            {t(sectionData.image_subtitle || 'Building the future of networking')}
           </p>
         </div>
       )}
@@ -139,7 +139,7 @@ export default function AboutUs({ settings, sectionData, brandColor = '#3b82f6' 
   const TextBlock = ({ centered = false }: { centered?: boolean }) => (
     <div className={centered ? 'text-center' : ''}>
       <h3 className="text-2xl font-bold text-gray-900 mb-6">
-        {sectionData.story_title || t('Empowering Professional Connections Since 2020')}
+        {t(sectionData.story_title || 'Empowering Professional Connections Since 2020')}
       </h3>
       <div className="text-gray-600 mb-8 leading-relaxed" dangerouslySetInnerHTML={{
         __html: (sectionData.story_content || t('Founded by a team of networking enthusiasts and technology experts, Kardex was born from the frustration of outdated paper business cards and the need for a more sustainable, efficient solution. Today, we serve over 10,000 professionals across 50+ countries, helping them build stronger business relationships through innovative digital solutions.')).replace(/\n/g, '</p><p class="mb-6">')
@@ -173,7 +173,7 @@ export default function AboutUs({ settings, sectionData, brandColor = '#3b82f6' 
             <div className="absolute inset-0 bg-black/50 flex items-center justify-center p-8">
               <div className="text-center text-white max-w-2xl">
                 <h3 className="text-2xl font-bold mb-4">
-                  {sectionData.story_title || t('Empowering Professional Connections Since 2020')}
+                  {t(sectionData.story_title || 'Empowering Professional Connections Since 2020')}
                 </h3>
                 <div className="mb-6 leading-relaxed opacity-90" dangerouslySetInnerHTML={{
                   __html: (sectionData.story_content || t('Founded by a team of networking enthusiasts and technology experts, Kardex was born from the frustration of outdated paper business cards and the need for a more sustainable, efficient solution. Today, we serve over 10,000 professionals across 50+ countries, helping them build stronger business relationships through innovative digital solutions.')).replace(/\n/g, '</p><p class="mb-4">')
@@ -253,10 +253,10 @@ export default function AboutUs({ settings, sectionData, brandColor = '#3b82f6' 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`text-center mb-8 sm:mb-12 lg:mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            {sectionData.title || t('About vCard')}
+            {t(sectionData.title || 'About vCard')}
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium">
-            {sectionData.description || t('We are passionate about transforming how professionals connect.')}
+            {t(sectionData.description || 'We are passionate about transforming how professionals connect.')}
           </p>
         </div>
 
