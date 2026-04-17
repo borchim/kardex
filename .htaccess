@@ -8,6 +8,8 @@
         Deny from all
     </Files>
 
+    DirectoryIndex index.html index.php
+
     RewriteEngine On
 
     # Handle Authorization Header
