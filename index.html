@@ -313,7 +313,7 @@
     <!-- Eyebrow badge -->
     <div class="inline-flex items-center gap-2 glass rounded-full px-4 py-1.5 text-xs font-semibold text-teal-300 mb-6 reveal">
       <span class="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse"></span>
-      NFC-powered · Real-time updates · Zero paper waste
+      ★★★★★ 4.9/5 from 820+ reviews · NFC-powered · Zero paper waste
     </div>
 
     <!-- Headline -->
@@ -330,12 +330,21 @@
     <!-- CTA Buttons -->
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal" style="animation-delay:0.3s">
       <a href="#pricing" class="btn-primary px-8 py-4 text-base w-full sm:w-auto text-center">
-        Shop Cards — $29.99
+        Get My Kardex Card — $29.99 →
       </a>
-      <a href="#" class="btn-secondary px-8 py-4 text-base w-full sm:w-auto text-center">
-        Create Free Profile ↗
+      <a href="#how-it-works" class="btn-secondary px-8 py-4 text-base w-full sm:w-auto text-center">
+        See How It Works ↓
       </a>
     </div>
+
+    <!-- Trust strip -->
+    <p class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-slate-500 text-xs mt-5 reveal" style="animation-delay:0.35s">
+      <span>🔒 Secure checkout</span>
+      <span class="text-white/10">·</span>
+      <span>🚚 Free worldwide shipping</span>
+      <span class="text-white/10">·</span>
+      <span>✅ 30-day money-back guarantee</span>
+    </p>
 
     <!-- Hero visual — floating NFC card -->
     <div class="mt-16 sm:mt-20 reveal" style="animation-delay:0.45s">
@@ -688,6 +697,7 @@
       <p class="text-teal-400 text-xs font-bold uppercase tracking-[0.2em] mb-3">Get Yours</p>
       <h2 class="text-4xl sm:text-5xl font-black gradient-text-white mb-4">One card. Infinite value.</h2>
       <p class="text-slate-500 max-w-md mx-auto">No subscriptions. No surprises. Pay once — use forever.</p>
+      <p class="text-amber-400 text-xs font-semibold mt-3">🔥 847 sold this month · Introductory pricing — won't last</p>
     </div>
 
     <!-- Pricing cards -->
@@ -772,10 +782,15 @@
           </ul>
 
           <a href="#" class="btn-primary text-center py-4 text-sm rounded-xl block">
-            Shop Cards — $29.99 →
+            Order My Kardex Card →
           </a>
 
-          <p class="text-center text-slate-600 text-xs mt-3">Free shipping · Ships in 3–5 days</p>
+          <!-- Trust badges -->
+          <div class="flex items-center justify-center gap-4 mt-4 text-[11px] text-slate-500">
+            <span class="flex items-center gap-1"><i data-lucide="shield-check" class="w-3 h-3 text-teal-400"></i> 30-day guarantee</span>
+            <span class="flex items-center gap-1"><i data-lucide="lock" class="w-3 h-3 text-teal-400"></i> Secure checkout</span>
+            <span class="flex items-center gap-1"><i data-lucide="truck" class="w-3 h-3 text-teal-400"></i> Free shipping</span>
+          </div>
         </div>
       </div>
 
@@ -937,6 +952,38 @@
         </div>
       </div>
 
+      <!-- Q6 -->
+      <div class="glass rounded-2xl overflow-hidden reveal" x-data="{ open: false }">
+        <button
+          @click="open = !open"
+          class="w-full flex items-center justify-between px-7 py-5 text-left group"
+        >
+          <span class="text-white font-semibold text-sm sm:text-base">What if I'm not satisfied?</span>
+          <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 group-hover:text-teal-400 transition-colors shrink-0 faq-chevron" :class="{ 'open': open }"></i>
+        </button>
+        <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2">
+          <div class="px-7 pb-6 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">
+            No risk, ever. If you're not completely happy within 30 days of receiving your card, we'll refund you in full — no questions asked. Just email <span class="text-teal-400">support@kardex.io</span> and we'll take care of it same day.
+          </div>
+        </div>
+      </div>
+
+      <!-- Q7 -->
+      <div class="glass rounded-2xl overflow-hidden reveal" x-data="{ open: false }">
+        <button
+          @click="open = !open"
+          class="w-full flex items-center justify-between px-7 py-5 text-left group"
+        >
+          <span class="text-white font-semibold text-sm sm:text-base">Are there any recurring fees?</span>
+          <i data-lucide="chevron-down" class="w-5 h-5 text-slate-500 group-hover:text-teal-400 transition-colors shrink-0 faq-chevron" :class="{ 'open': open }"></i>
+        </button>
+        <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2">
+          <div class="px-7 pb-6 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">
+            None. $29.99 once — that's it. Profile hosting, analytics, dynamic updates, and all future features are included for life. No monthly fees, no premium tier, no gotchas.
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -962,14 +1009,18 @@
         Join 1,000+ professionals who've already made the switch. One purchase. Endless connections.
       </p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="#pricing" class="btn-primary px-10 py-4 text-base w-full sm:w-auto text-center">
-          Get Your Kardex — $29.99
+        <a href="#" class="btn-primary px-10 py-4 text-base w-full sm:w-auto text-center">
+          Order My Card Now — $29.99 →
         </a>
         <a href="#" class="btn-secondary px-10 py-4 text-base w-full sm:w-auto text-center">
           Create Free Profile
         </a>
       </div>
-      <p class="text-slate-600 text-xs mt-5">Free shipping worldwide · 30-day satisfaction guarantee</p>
+      <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-1 mt-6 text-xs text-slate-500">
+        <span class="flex items-center gap-1.5"><i data-lucide="shield-check" class="w-3.5 h-3.5 text-teal-400"></i> 30-day money-back guarantee</span>
+        <span class="flex items-center gap-1.5"><i data-lucide="truck" class="w-3.5 h-3.5 text-teal-400"></i> Free worldwide shipping</span>
+        <span class="flex items-center gap-1.5"><i data-lucide="lock" class="w-3.5 h-3.5 text-teal-400"></i> Secure checkout</span>
+      </div>
     </div>
 
   </div>
