@@ -361,11 +361,18 @@ function Nav({ onCta }) {
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 40 }}>
-          <div style={{
-            fontFamily: "'Instrument Serif', Georgia, serif",
-            fontSize: 26, letterSpacing: -0.5, color: '#0F1A2E',
-          }}>
-            Kardex<span style={{ color: '#C9A24A' }}>.</span>
+          <div style={{ display:'flex', alignItems:'center', gap: 10 }}>
+            <svg width="30" height="30" viewBox="0 0 64 64" aria-label="Kardex">
+              <rect x="14" y="10" width="5" height="44" rx="1.5" fill="#0F1A2E"/>
+              <path d="M22 32 Q36 18 46 12" fill="none" stroke="#0F1A2E" strokeWidth="5" strokeLinecap="round"/>
+              <path d="M22 32 Q36 46 46 52" fill="none" stroke="#C9A24A" strokeWidth="5" strokeLinecap="round"/>
+            </svg>
+            <div style={{
+              fontFamily: "'Instrument Serif', Georgia, serif",
+              fontSize: 26, letterSpacing: -0.5, color: '#0F1A2E',
+            }}>
+              Kardex<span style={{ color: '#C9A24A' }}>.</span>
+            </div>
           </div>
           <div style={{ display: 'flex', gap: 28, fontSize: 14, color: '#4A5464' }}>
             <a style={linkStyle} href="#features">Features</a>
@@ -1004,9 +1011,16 @@ function Footer() {
       <div style={{ maxWidth: 1240, margin: '0 auto' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1.5fr repeat(4, 1fr)', gap: 40 }}>
           <div>
-            <div style={{
-              fontFamily: "'Instrument Serif', Georgia, serif", fontSize: 28, color: '#F4EFE4', letterSpacing: -0.5,
-            }}>Kardex<span style={{ color: '#C9A24A' }}>.</span></div>
+            <div style={{ display:'flex', alignItems:'center', gap: 12 }}>
+              <svg width="34" height="34" viewBox="0 0 64 64" aria-label="Kardex">
+                <rect x="14" y="10" width="5" height="44" rx="1.5" fill="#F4EFE4"/>
+                <path d="M22 32 Q36 18 46 12" fill="none" stroke="#F4EFE4" strokeWidth="5" strokeLinecap="round"/>
+                <path d="M22 32 Q36 46 46 52" fill="none" stroke="#C9A24A" strokeWidth="5" strokeLinecap="round"/>
+              </svg>
+              <div style={{
+                fontFamily: "'Instrument Serif', Georgia, serif", fontSize: 28, color: '#F4EFE4', letterSpacing: -0.5,
+              }}>Kardex<span style={{ color: '#C9A24A' }}>.</span></div>
+            </div>
             <div style={{ fontSize: 13, marginTop: 12, maxWidth: 280, lineHeight: 1.5 }}>
               The quiet, powerful digital business card. Built by a small team in Lisbon.
             </div>
